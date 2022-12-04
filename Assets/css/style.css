@@ -1,0 +1,37 @@
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
+  background-color: orange;
+}
+ 
+main {
+  margin: 20px;
+  padding: 10px;
+  background-color: aqua;
+}
+
+h1 {
+  font-size: 200%;
+  margin: 20px;
+  text-align: center;
+}
+
+h2{
+  font-size: 150%;
+  margin: 20px;
+  text-align: center;
+}
+
+  nav {
+    display: flex;
+    justify-content: space-between;
+    
+}
+
+button {
+  background-color: green;
+  align-content: center;
+}
