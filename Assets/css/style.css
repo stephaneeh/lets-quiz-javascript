@@ -28,19 +28,47 @@ h2{
   nav {
     display: flex;
     justify-content: space-between;
+  }
     
-}
+  p {
+    padding: 5px;
+    background-color: grey;
+    border-radius: 5px;
+    margin: 5px;
+  }
 
 button {
   background-color: green;
   align-content: center;
 }
 
-.question-container {
+.home-container {
+  display: visible;
   border: 1px dashed black;
+  text-align: center;
+  margin: 5px;
+}
+
+.question-container {
+  display: none;
+  flex-direction: column;
+  border: 1px dashed black;
+  text-align: center;
+  margin: 5px;
 }
 
 .option {
   text-align: center;
   font-size: 120%;
+  background-color: grey;
+}
+
+.correct {
+  background-color: green;
+  font-weight: bold;
+}
+
+.incorrect {
+  background-color: red;
+  font-weight: italic;
 }
