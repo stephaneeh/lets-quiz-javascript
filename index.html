@@ -14,10 +14,19 @@
     </header>
     
     <main>
-        <button id="timer"> Get Started?</button>
+        <button id="timer"> Get Started?</button> 
+        <!-- TODO:possibly rename id as this will start whole quiz, not just timer -->
+
+        <section class="question-container">
+            <h1 id="question">Enter question here</h1>
+            <div class="options-container"></div>
+                <p class="option" data-number="1" data-state="visible">Option 1</p>
+                <p class="option" data-number="2" data-state="visible">Option 2</p>
+                <p class="option" data-number="3" data-state="visible">Option 3</p>
+                <p class="option" data-number="4" data-state="visible">Option 4</p>
+        </section>
     </main>
     
     <script src="./assets/js/script.js"></script>
-
 </body>
 </html>

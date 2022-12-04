@@ -35,3 +35,12 @@ button {
   background-color: green;
   align-content: center;
 }
+
+.question-container {
+  border: 1px dashed black;
+}
+
+.option {
+  text-align: center;
+  font-size: 120%;
+}
