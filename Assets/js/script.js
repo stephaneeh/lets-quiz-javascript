@@ -28,7 +28,7 @@ countdown.addEventListener("click", startCountdown);
 const question = document.getElementById("question");
 //Get answer content
 var options = Array.from(document.getElementsByClassName("option"));
-
+let acceptingAnswer = false; 
 let currentQuestion = {}; //will be an object
 let score = 0;
 let questionCounter = 0; //what question are you on?
@@ -82,10 +82,14 @@ startGame = function(){
 }
 
 getNewQuestion = function() {
+
+    if(availableQuestions.length === 0 || questionCounter > MAX_QUESTIONS) {
+        console.log("you have reached the end of the questions")
+    };
+
     questionCounter++;
     //get random question from available questions index
     const randomQuestion = Math.floor(Math.random() * availableQuestions.length);
-    console.log(randomQuestion);
     currentQuestion = availableQuestions[randomQuestion]; //pulls an available question out of the questions array
     question.innerText = currentQuestion.question; //prints the selected question in HTML on the page
 
@@ -94,8 +98,26 @@ getNewQuestion = function() {
         const number = option.dataset["number"]; //will move through our options and pull the dataset option number
         option.innerText = currentQuestion["option" + number]; //updates the property based on the data number 
     });
+    availableQuestions.splice(randomQuestion, 1); //removes the question from the available questions array
+
+    acceptingAnswer = true; //after we have loaded the question, users can answer
+
 };
 
+//each time an option is selected
+options.forEach(option => {
+    option.addEventListener("click", function(event) {
+        if(!acceptingAnswer) return; //do nothing if we aren't ready for the game to start
+        
+        acceptingAnswer = false;
+        const selectedChoice = event.target;
+        const selectedAnswer = selectedChoice.dataset["number"];
+        console.log(option.textContent);
+
+        getNewQuestion(); //once answered, move to next question
+
+    });
+ });
 
 //calls the startGame function
 startGame();
