@@ -57,6 +57,28 @@ button {
   margin: 5px;
 }
 
+.submit-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px dashed black;
+  align-items: center;
+  margin: 5px;
+}
+
+.results-container {
+  display: flex;
+  flex-direction: column;
+  border: 1px dashed black;
+  align-items: center;
+  margin: 5px;
+}
+
+input,
+button {
+  width: 25%;
+  margin: 10px;
+}
+
 .option {
   text-align: center;
   font-size: 120%;
@@ -71,4 +93,8 @@ button {
 .incorrect {
   background-color: red;
   font-weight: italic;
+}
+
+#timer {
+  display: visible;
 }

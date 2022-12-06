@@ -1,20 +1,33 @@
-//countdown time 
-let counter = 30; //TODO: Update total time
-
-//Load sections based on the current state of the quiz 
-//Get question content
-const question = document.getElementById("question");
-//Get answer content
+//------timer variables
+let timeLeft = 50; //TODO: Update total time
+var timerInterval = "";
+//------element variables
+var timerEl = document.querySelector("#timer");
+var startButton = document.querySelector("#start-button");
+var homeContainer = document.querySelector(".home-container");
+var questionContainer = document.querySelector(".question-container");
+var scoreContainer = document.querySelector(".score-container");
+var nameString = document.querySelector("#name");
+var submitButton = document.querySelector("#submit-button");
+//------question variables
+var question = document.getElementById("question");
 var options = Array.from(document.getElementsByClassName("option"));
-let acceptingAnswer = false; 
-let currentQuestion = {}; //will be an object
-let score = 0;
-let questionCounter = 0; //what question are you on?
-let availableQuestions = [] //full question set, take questions out of available array to give new questions
+var acceptingAnswer = false; 
+var currentQuestion = {}; //will be an object
+var questionCounter = 0; //what question are you on?
+var availableQuestions = [] //full question set, take questions out of available array to give new questions
+var randomQuestion = Math.floor(Math.random() * availableQuestions.length);
+//------highscore variables
+var score = timeLeft;
+var user = nameString.value;
 
+var highscore = {
+    score: score,
+    user: user,
+};
 
-//List of questions
-let questions = [
+//------question list TODO: update questions
+var questions = [
     {
         question: "What is your favourite colour?",
         option1: "yellow",
@@ -49,55 +62,66 @@ let questions = [
     },
 ]
 
+//------event listeners
+//TODO: THIS IS COMPLETE AND WORKING
+//calls the startGame function
+startButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    startQuiz();
+});
 
-startGame = function(){
+submitButton.addEventListener("click", function(event) {
+    event.preventDefault();
+    submitScore();
+});
+
+
+//------start the quiz
+function timer() {
+    var timeInterval = setInterval(function() {
+        if (timeLeft > 1) {
+                timerEl.textContent = timeLeft + " seconds remaining";
+                timeLeft--;
+        } else {
+            timerEl.textContent = "Time is up!";
+            clearInterval(timeInterval);
+        }
+    }, 1000);
+    timer.endTimer = endTimer;
+    function endTimer() {
+      clearInterval(timeInterval);
+      timerEl.textContent = "Time is up!";
+    }
+  };
+
+function startQuiz () {
     questionCounter = 0; //always start at 0
     score = 0;
     availableQuestions = [...questions]; //copy all questions from the question array, spreadout by new arrays
     console.log(availableQuestions); //TODO:: REMOVE AT THE END OF THIS
+    homeContainer.style.display = "none";
+    questionContainer.style.display = "block ";
+    scoreContainer.style.display = "none";
     getNewQuestion();
-    startCountdown();
-
-    //Countdown timer for quiz
-    var timer = document.querySelector("#timer");
+    timer();
 
 }
 
-    //function to start the countdown
-    function startCountdown() {
-
-        var timeInterval = setInterval(function() {
-            if (counter > 1) {
-                countdown.textContent = counter + " seconds remaining";
-                counter--;
-            } else if (counter === 1) {
-                countdown.textContent = counter + " second remaining";
-                counter--;
-            } else {
-                countdown.textContent = "Time is up!";
-                clearInterval(timeInterval);
-                //TODO: add function to move to completed quiz setion
-                //TODO: add function to increase time more when answer is incorrect
-                //TODO: add funtion to hide/unhide quizContainer when quiz is started/finished
-            }
-        }, 1000);
+function getNewQuestion() {
+    //TODO: take to end page once questions or timerEl is 0
+    if(availableQuestions.length === 0) {
+        timer.endTimer();
+        endQuiz();
+    } else {
+        questionCounter++;
+        //get random question from available questions index
+        currentQuestion = availableQuestions[randomQuestion]; //pulls an available question out of the questions array
+        question.innerText = currentQuestion.question; //prints the selected question in HTML on the page
+        getOptions();
     }
+}
 
-    
-getNewQuestion = function() {
-
-    if(availableQuestions.length === 0 || counter == 0) {
-        console.log("you have reached the end of the questions")
-        console.log(counter + " seconds remaining");
-    };
-
-    questionCounter++;
-    //get random question from available questions index
-    const randomQuestion = Math.floor(Math.random() * availableQuestions.length);
-    currentQuestion = availableQuestions[randomQuestion]; //pulls an available question out of the questions array
-    question.innerText = currentQuestion.question; //prints the selected question in HTML on the page
-
-    
+function getOptions () {
     //pull our options
     options.forEach(option => {
         const number = option.dataset["number"]; //will move through our options and pull the dataset option number
@@ -106,12 +130,15 @@ getNewQuestion = function() {
     availableQuestions.splice(randomQuestion, 1); //removes the question from the available questions array
 
     acceptingAnswer = true; //after we have loaded the question, users can answer
+    checkResults();
+}
 
+//------check the answers
+function checkResults () {
     //each time an option is selected
     options.forEach(option => {
         option.addEventListener("click", function(event) {
             if(!acceptingAnswer) return; //do nothing if we aren't ready for the game to start
-            
             acceptingAnswer = false;
             const selectedChoice = event.target; //prints as string
             const selectedAnswer = selectedChoice.dataset["number"]; //prints as number
@@ -120,7 +147,8 @@ getNewQuestion = function() {
             
             //updates the color of the choice depending on the outcome
             var optionResult = "incorrect";
-                if (selectedAnswer == currentQuestion.answer) {
+                timeLeft = timeLeft - 10;    
+            if (selectedAnswer == currentQuestion.answer) {
                     optionResult = "correct";
                 }
                 console.log(optionResult);
@@ -132,24 +160,22 @@ getNewQuestion = function() {
                 }, 1000);
             });
         });
-
 };
 
-function displayQuiz () {
-    var homeContainer = document.querySelector(".home-container");
-    var questionContainer = document.querySelector(".question-container");
-
-    if (homeContainer.dataset = "visible") {
-        homeContainer.style.display = "none";
-        questionContainer.style.display = "flex";
-    } 
+//------end the quiz
+function endQuiz () {
+    homeContainer.style.display = "none";
+    questionContainer.style.display = "none";
+    scoreContainer.style.display = "flex";
+    console.log("You're score is " + timeLeft); //TODO: remov later
+    submitScore();
 }
 
+//------view the highscore
+function submitScore() {
+    localStorage.setItem("highscore", JSON.stringify(highscore));
+};
 
 
-//calls the startGame function
-timer.addEventListener("click", function(event) {
-    startGame();
-    displayQuiz();
-});
+
 

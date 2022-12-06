@@ -10,26 +10,41 @@
 <body>
     <header>
         <h2><a href="./assets/highscore.html">View Highscores</a></h2>
-        <h2 id="countdown">Timer Countdown</h2>
+        <h2 id="timer">Timer Countdown</h2>
     </header>
     
     <main>
         <section class="home-container" data-state="visible">
             <h1>Welcome to the wide wonderful world of Javascript!</h1>
             <p>Put your knowledge to the test and see if you can go toe to toe with the best of the best when it comes to Javascript!</p>
-            <button id="timer"> Let's do it!</button> 
+            <button id="start-button"> Let's do it!</button> 
         </section>
 
         <!-- TODO:possibly rename id as this will start whole quiz, not just timer -->
 
         <section class="question-container" data-state="visible">
-            <h1 id="question">Enter question here</h1>
+            <h2 id="question">Enter question here</h2>
             <div class="options-container">
                 <p class="option" data-number="1" data-state="visible"></p>
                 <p class="option" data-number="2" data-state="visible"></p>
                 <p class="option" data-number="3" data-state="visible"></p>
                 <p class="option" data-number="4" data-state="visible"></p>
             </div>
+        </section>
+
+        <section class="submit-container" data-state="visible">
+            <h2>Game over!</h2>
+            <div class="score"></div>
+            <h3>Did you get the newest highscore? Submit your results below!</h3>
+            <input type="text" id="name" placeholder="Enter your initials here">
+            <button id="submit-button">Submit Score</button>
+        </section>
+
+        <section class="results-container" data-state="visible">
+            <h2>Checout the current highscores!</h2>
+            <ul id="score-list"></ul>
+            <button id="try-again">Try again?</button>
+            <button id="clear-scores">Clear highscores</button>
         </section>
 
     </main>
