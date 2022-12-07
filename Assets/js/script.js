@@ -6,9 +6,10 @@ var timerEl = document.querySelector("#timer");
 var startButton = document.querySelector("#start-button");
 var homeContainer = document.querySelector(".home-container");
 var questionContainer = document.querySelector(".question-container");
-var scoreContainer = document.querySelector(".score-container");
-var nameString = document.querySelector("#name");
-var submitButton = document.querySelector("#submit-button");
+var resultsContainer = document.querySelector(".results-container");
+var highscoreContainer = document.querySelector(".highscore-container");
+var restartButton = document.querySelector("#try-again");
+var clearButton = document.querySelector("#clear-scores");
 //------question variables
 var question = document.getElementById("question");
 var options = Array.from(document.getElementsByClassName("option"));
@@ -18,13 +19,14 @@ var questionCounter = 0; //what question are you on?
 var availableQuestions = [] //full question set, take questions out of available array to give new questions
 var randomQuestion = Math.floor(Math.random() * availableQuestions.length);
 //------highscore variables
-var score = timeLeft;
-var user = nameString.value;
+var username = document.getElementById("username");
+var submitButton = document.querySelector("#submit-button");
+var finalScore = document.querySelector("#final-score");
 
-var highscore = {
-    score: score,
-    user: user,
-};
+var highscores = JSON.parse(localStorage.getItem("highscore"));
+var mostRecentScore = localStorage.getItem("mostRecentScore");
+var score = timeLeft;
+var user = username.value;
 
 //------question list TODO: update questions
 var questions = [
@@ -63,18 +65,24 @@ var questions = [
 ]
 
 //------event listeners
-//TODO: THIS IS COMPLETE AND WORKING
 //calls the startGame function
 startButton.addEventListener("click", function(event) {
     event.preventDefault();
     startQuiz();
 });
 
-submitButton.addEventListener("click", function(event) {
-    event.preventDefault();
-    submitScore();
-});
-
+function startQuiz () {
+    questionCounter = 0; //always start at 0
+    score = 0;
+    availableQuestions = [...questions]; //copy all questions from the question array, spreadout by new arrays
+    console.log(availableQuestions); //TODO:: REMOVE AT THE END OF THIS
+    homeContainer.style.display = "none";
+    questionContainer.style.display = "block ";
+    resultsContainer.style.display = "none";
+    highscoreContainer.style.display = "none";
+    timer();
+    getQuestions();
+}
 
 //------start the quiz
 function timer() {
@@ -93,24 +101,11 @@ function timer() {
       timerEl.textContent = "Time is up!";
     }
   };
-
-function startQuiz () {
-    questionCounter = 0; //always start at 0
-    score = 0;
-    availableQuestions = [...questions]; //copy all questions from the question array, spreadout by new arrays
-    console.log(availableQuestions); //TODO:: REMOVE AT THE END OF THIS
-    homeContainer.style.display = "none";
-    questionContainer.style.display = "block ";
-    scoreContainer.style.display = "none";
-    getNewQuestion();
-    timer();
-
-}
-
-function getNewQuestion() {
+function getQuestions() {
     //TODO: take to end page once questions or timerEl is 0
     if(availableQuestions.length === 0) {
         timer.endTimer();
+        localStorage.setItem("finalScore", timeLeft);
         endQuiz();
     } else {
         questionCounter++;
@@ -156,7 +151,7 @@ function checkResults () {
                 selectedChoice.classList.add(optionResult);
                 setTimeout(() => {
                     selectedChoice.classList.remove(optionResult);
-                    getNewQuestion(); //once answered, move to next question
+                    getQuestions(); //once answered, move to next question
                 }, 1000);
             });
         });
@@ -165,16 +160,79 @@ function checkResults () {
 //------end the quiz
 function endQuiz () {
     homeContainer.style.display = "none";
-    questionContainer.style.display = "none";
-    scoreContainer.style.display = "flex";
-    console.log("You're score is " + timeLeft); //TODO: remov later
-    submitScore();
+    questionContainer.style.display = "none ";
+    resultsContainer.style.display = "flex";
+    highscoreContainer.style.display = "none";
+    saveScore();
 }
 
-//------view the highscore
-function submitScore() {
-    localStorage.setItem("highscore", JSON.stringify(highscore));
-};
+//TODO: SUBMIT HIGHSCORE
+function saveScore() {
+    console.log("You're score is " + timeLeft); //TODO: remove later
+    finalScore.textContent = "You're score is " + timeLeft + " seconds";
+}
+    //Page will show final results and the submit score button
+    //will then take the user the highscores page
+
+// submitButton.addEventListener("click", function(event) {
+//     event.preventDefault();
+//     submitScore();
+// });
+// localStorage.setItem("highscore", highscoreObject);
+
+
+
+
+
+//FIXME: double check this works
+
+
+// //TODO: VIEW HIGHSCORE
+
+
+
+
+
+// //------view the highscore
+// function submitScore() {
+//     localStorage.setItem("highscore", JSON.stringify(highscore));
+// };
+
+
+// var highscore = {
+//     score: score,
+//     user: user,
+// };
+
+
+
+
+
+// function highScores () {
+//     //Will display the top 10 highscores
+//     //Will display byttongs to try again, clear highscores or go home
+//     //Try again goes to start game function
+//     //go home goes to endQuiz function? maybe
+// }
+
+// var scoreList = document.querySelector("#score-list"); //list out score results
+
+// var todos = [];
+
+// // The following function renders items in a todo list as <li> elements
+// function renderScores() {
+//     // Render a new li for each todo
+//     for (var i = 0; i < todos.length; i++) {
+//       var todo = todos[i];
+//       var li = document.createElement("li");
+//       li.textContent = todo;
+//       li.setAttribute("data-index", i);
+//       var button = document.createElement("button");
+//       button.textContent = "Complete ✔️";
+//       li.appendChild(button);
+//       todoList.appendChild(li);
+//     }
+//   }
 
 
 

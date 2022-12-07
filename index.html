@@ -14,15 +14,13 @@
     </header>
     
     <main>
-        <section class="home-container" data-state="visible">
+        <section class="home-container">
             <h1>Welcome to the wide wonderful world of Javascript!</h1>
             <p>Put your knowledge to the test and see if you can go toe to toe with the best of the best when it comes to Javascript!</p>
             <button id="start-button"> Let's do it!</button> 
         </section>
 
-        <!-- TODO:possibly rename id as this will start whole quiz, not just timer -->
-
-        <section class="question-container" data-state="visible">
+        <section class="question-container">
             <h2 id="question">Enter question here</h2>
             <div class="options-container">
                 <p class="option" data-number="1" data-state="visible"></p>
@@ -32,18 +30,21 @@
             </div>
         </section>
 
-        <section class="submit-container" data-state="visible">
-            <h2>Game over!</h2>
-            <div class="score"></div>
+        <section class="results-container">
+            <h1>Game over!</h1>
+            <h2 id="final-score"></h2> 
+            <!-- FIXME: possible remove content -->
             <h3>Did you get the newest highscore? Submit your results below!</h3>
-            <input type="text" id="name" placeholder="Enter your initials here">
-            <button id="submit-button">Submit Score</button>
+            <form>
+                <input type="text" id="username" placeholder="Enter your initials here">
+                <button id="submit-button">Submit Score</button>
+            </form>
         </section>
 
-        <section class="results-container" data-state="visible">
-            <h2>Checout the current highscores!</h2>
+        <section class="highscore-container">
+            <h2>Checkout the current highscores!</h2>
             <ul id="score-list"></ul>
-            <button id="try-again">Try again?</button>
+            <button id="try-again">Play again?</button>
             <button id="clear-scores">Clear highscores</button>
         </section>
 
