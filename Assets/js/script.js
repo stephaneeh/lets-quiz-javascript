@@ -168,12 +168,6 @@ function saveScore() {
 }
 submitButton.addEventListener("click", function(event) {
      event.preventDefault();
-     submitButton.disabled = !username.value;
-     if(username == ''){
-        alert('Please enter your initials to save your score');
-        return true;
-
-      }
      var score = {
         // score: timeLeft,
         score: Math.floor(Math.random() * 100), //TODO: FOR TESTING, REMOVE
@@ -188,16 +182,19 @@ submitButton.addEventListener("click", function(event) {
     viewScoreboard();
  });
 
-
+ 
 function viewScoreboard() {
     homeContainer.style.display = "none";
     resultsContainer.style.display = "none ";
     highscoreContainer.style.display = "flex";
 
+
     for (let i = 0; i < highScores.length; i++) {
+        var resultsDetails = `${highScores[i].name}` + " - " + `${highScores[i].score}` + " points";
+       
         listItem = document.createElement("li");
         scoreboardList.appendChild(listItem);
-        listItem.innerText = [i+1] + ". " + `${highScores[i].name}-${highScores[i].score}`; 
+        listItem.innerText = [i+1] + ". " + resultsDetails; 
     }   
 }
 
