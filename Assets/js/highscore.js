@@ -1,49 +1,26 @@
-var resultsContainer = document.querySelector(".results-container");
-var scoreContainer = document.querySelector(".highscore-container");
-var scoresList = document.querySelector(".scoreboard");
-
-var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+var todoList = document.querySelector(".scoreboard");
 
 var tryAgain = document.querySelector(".try-again");
 var clearScores = document.querySelector(".clearScores");  //button to clear the scores
 
-// localStorage.setItem("highScores", JSON.stringify(highScores));
+
+var highScores = JSON.parse(localStorage.getItem("highScores"));
+
+
+console.log(highScores);
+
+
+highScores.map(score => {
+console.log(`${highScores.score}-${highScores.name}`);
+})
 
 
 
-highScores.map(score => (
-    console.log(${highScores.score}-${highScores.name});
-))
-//------ View the scoreboard
-function viewScoreboard () {
-
-    scoresList.innerHTML ="";
-    console.log(highScores);
-
-   for (var i = 0; i < highScores.length; i++) {
-    var highScore = highScores[i];
-    var li = document.createElement("li");
-    li.innerHTML = `${highScores[i][0]}: ${highScores[i][1]}`;
-    scoresList.appendChild(li);
-  }
-
-  init();
-};
 
 
+// init()
 
-// This function is being called below and will run when the page loads.
-function init() {
-    // Get stored todos from localStorage
-    var storedScores = JSON.parse(localStorage.getItem("highScores"));
-    // If todos were retrieved from localStorage, update the todos array to it
-    if (storedScores !== null) {
-      todos = storedScores;
-    }
-    // This is a helper function that will render todos to the DOM
-}
 
-  viewScoreboard();
 
 
 

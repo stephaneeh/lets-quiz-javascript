@@ -44,6 +44,11 @@ ol {
   margin: 5px;
 }
 
+li {
+  padding: 5px;
+  background-color: orange;
+  margin: 5px;
+}
 
 form {
   width: 100%;
@@ -84,7 +89,7 @@ button {
 }
 
 .highscore-container {
-  display: flex;
+  display: none;
   flex-direction: column;
   border: 1px dashed black;
   align-items: center;

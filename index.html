@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <h2><a href="./assets/highscore.html">View Highscores</a></h2>
+        <input type="text" value="View Highscores" onclick="viewScoreboard();" />
         <h2 id="timer">Timer Countdown</h2>
     </header>
     
@@ -42,6 +42,14 @@
                 </a>
             </form>
         </section>
+
+        <section class="highscore-container">
+            <h2>Checkout the scoreboard!</h2>
+            <ol class="scoreboard"></ol>
+            <button id="try-again">Try again?</button>
+            <button id="clear-scores">Clear highscores</button>
+        </section>
+        
     </main>
     
     <script src="./assets/js/script.js"></script>

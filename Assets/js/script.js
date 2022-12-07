@@ -1,7 +1,7 @@
-//------timer variables
+    //------timer variables
 let timeLeft = 75; //TODO: Update total time
 var timerInterval = "";
-//------element variables
+    //------element variables
 var timerEl = document.querySelector("#timer");
 var startButton = document.querySelector("#start-button");
 var homeContainer = document.querySelector(".home-container");
@@ -10,7 +10,7 @@ var resultsContainer = document.querySelector(".results-container");
 var highscoreContainer = document.querySelector(".highscore-container");
 var restartButton = document.querySelector("#try-again");
 var clearButton = document.querySelector("#clear-scores");
-//------question variables
+    //------question variables
 var question = document.getElementById("question");
 var options = Array.from(document.getElementsByClassName("option"));
 var acceptingAnswer = false; 
@@ -18,12 +18,15 @@ var currentQuestion = {}; //will be an object
 var questionCounter = 0; //what question are you on?
 var availableQuestions = [] //full question set, take questions out of available array to give new questions
 var randomQuestion = Math.floor(Math.random() * availableQuestions.length);
+
 //------highscore variables
 var username = document.getElementById("username");
 var submitButton = document.querySelector("#submit-button");
 var finalScore = document.querySelector("#final-score");
 var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 var scoreboardCount = 5;
+var scoreboardList = document.querySelector(".scoreboard");
+
 
 //------question list TODO: update questions
 var questions = [
@@ -161,19 +164,49 @@ function endQuiz () {
 
 //------ save score in localStorage
 function saveScore() {
-    finalScore.textContent = "Your score is " + timeLeft + " seconds";
+    finalScore.innerText = "Your score is " + timeLeft + " seconds";
 }
 submitButton.addEventListener("click", function(event) {
      event.preventDefault();
+     submitButton.disabled = !username.value;
+     if(username == ''){
+        alert('Please enter your initials to save your score');
+        return true;
+
+      }
      var score = {
-        score: timeLeft,
-        // score: Math.floor(Math.random() * 100), TODO: FOR TESTING, REMOVE
+        // score: timeLeft,
+        score: Math.floor(Math.random() * 100), //TODO: FOR TESTING, REMOVE
         name: username.value,
     };
+
     highScores.push(score); //add scores to array
     username.value = ""; //clears input field
     highScores.sort((a,b) => b.score - a.score); //sort score ascending
     highScores.splice(5); //remove after index 5
-    localStorage.setItem("highScores", JSON.stringify(highScores));
-    // viewScoreboard();
+    localStorage.setItem("highScores", JSON.stringify(highScores));    
+    viewScoreboard();
  });
+
+
+function viewScoreboard() {
+    homeContainer.style.display = "none";
+    resultsContainer.style.display = "none ";
+    highscoreContainer.style.display = "flex";
+
+    for (let i = 0; i < highScores.length; i++) {
+        listItem = document.createElement("li");
+        scoreboardList.appendChild(listItem);
+        listItem.innerText = [i+1] + ". " + `${highScores[i].name}-${highScores[i].score}`; 
+    }   
+}
+
+clearButton.addEventListener("click", function() {
+    localStorage.clear();
+    window.location.reload();
+   });
+
+restartButton.addEventListener("click", function() {
+    highscoreContainer.style.display = "none ";
+    homeContainer.style.display = "block";
+});
