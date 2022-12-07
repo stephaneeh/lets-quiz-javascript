@@ -172,20 +172,23 @@ function saveScore() {
 submitButton.addEventListener("click", function(event) {
      event.preventDefault();
      var score = {
-        score: timeLeft,
+        // score: timeLeft,
+        score: Math.floor(Math.random() * 100),
         name: username.value,
     };
     highScores.push(score); //add scores to array
     highScores.sort((a,b) => b.score - a.score); //sort score ascending
     highScores.splice(5); //remove after index 5
 
+    localStorage.setItem("highScores", JSON.stringify(highScores));
     viewScoreboard();
  });
 
 function viewScoreboard () {
-
-
-
+    homeContainer.style.display = "none";
+    questionContainer.style.display = "none ";
+    resultsContainer.style.display = "none";
+    highscoreContainer.style.display = "flex";
 }
 
 
