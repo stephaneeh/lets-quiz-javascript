@@ -1,5 +1,5 @@
 //------timer variables
-let timeLeft = 50; //TODO: Update total time
+let timeLeft = 80; //TODO: Update total time
 var timerInterval = "";
 //------element variables
 var timerEl = document.querySelector("#timer");
@@ -23,10 +23,6 @@ var username = document.getElementById("username");
 var submitButton = document.querySelector("#submit-button");
 var finalScore = document.querySelector("#final-score");
 
-var highscores = JSON.parse(localStorage.getItem("highscore"));
-var mostRecentScore = localStorage.getItem("mostRecentScore");
-var score = timeLeft;
-var user = username.value;
 
 //------question list TODO: update questions
 var questions = [
@@ -105,7 +101,6 @@ function getQuestions() {
     //TODO: take to end page once questions or timerEl is 0
     if(availableQuestions.length === 0) {
         timer.endTimer();
-        localStorage.setItem("finalScore", timeLeft);
         endQuiz();
     } else {
         questionCounter++;
@@ -166,47 +161,40 @@ function endQuiz () {
     saveScore();
 }
 
+
+var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+var scoreboardCount = 5;
+
 //TODO: SUBMIT HIGHSCORE
 function saveScore() {
-    console.log("You're score is " + timeLeft); //TODO: remove later
-    finalScore.textContent = "You're score is " + timeLeft + " seconds";
+    finalScore.textContent = "Your score is " + timeLeft + " seconds";
 }
-    //Page will show final results and the submit score button
-    //will then take the user the highscores page
+submitButton.addEventListener("click", function(event) {
+     event.preventDefault();
+     var score = {
+        score: timeLeft,
+        name: username.value,
+    };
+    highScores.push(score); //add scores to array
+    highScores.sort((a,b) => b.score - a.score); //sort score ascending
+    highScores.splice(5); //remove after index 5
 
-// submitButton.addEventListener("click", function(event) {
-//     event.preventDefault();
-//     submitScore();
-// });
-// localStorage.setItem("highscore", highscoreObject);
+    viewScoreboard();
+ });
+
+function viewScoreboard () {
+
+
+
+}
 
 
 
 
 
-//FIXME: double check this works
 
 
 // //TODO: VIEW HIGHSCORE
-
-
-
-
-
-// //------view the highscore
-// function submitScore() {
-//     localStorage.setItem("highscore", JSON.stringify(highscore));
-// };
-
-
-// var highscore = {
-//     score: score,
-//     user: user,
-// };
-
-
-
-
 
 // function highScores () {
 //     //Will display the top 10 highscores
@@ -214,26 +202,5 @@ function saveScore() {
 //     //Try again goes to start game function
 //     //go home goes to endQuiz function? maybe
 // }
-
-// var scoreList = document.querySelector("#score-list"); //list out score results
-
-// var todos = [];
-
-// // The following function renders items in a todo list as <li> elements
-// function renderScores() {
-//     // Render a new li for each todo
-//     for (var i = 0; i < todos.length; i++) {
-//       var todo = todos[i];
-//       var li = document.createElement("li");
-//       li.textContent = todo;
-//       li.setAttribute("data-index", i);
-//       var button = document.createElement("button");
-//       button.textContent = "Complete ✔️";
-//       li.appendChild(button);
-//       todoList.appendChild(li);
-//     }
-//   }
-
-
 
 
