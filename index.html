@@ -10,7 +10,7 @@
 <body>
     <header>
         <input type="text" value="View Highscores" onclick="viewScoreboard();" />
-        <h2 id="timer">Timer Countdown</h2>
+        <h3 id="timer">Timer Countdown</h3>
     </header>
     
     <main>
@@ -37,8 +37,12 @@
             <h3>Did you get the newest highscore? Enter your initials below and hit submit to find out!</h3>
             <form>
                 <input type="text" id="username" placeholder="Enter your initials here">
-                
-                    <button id="submit-button">Submit</button>
+                    <button 
+                    type="submit" 
+                    id="submit-button" 
+                    onclick="saveScore(event)" 
+                    disabled>Submit
+                </button>
                 </a>
             </form>
         </section>
@@ -46,7 +50,7 @@
         <section class="highscore-container">
             <h2>Checkout the scoreboard!</h2>
             <ol class="scoreboard"></ol>
-            <button id="try-again">Try again?</button>
+            <button id="try-again">Return Home</button>
             <button id="clear-scores">Clear highscores</button>
         </section>
         

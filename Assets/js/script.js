@@ -27,7 +27,6 @@ var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
 var scoreboardCount = 5;
 var scoreboardList = document.querySelector(".scoreboard");
 
-
 //------question list TODO: update questions
 var questions = [
     {
@@ -75,7 +74,6 @@ function startQuiz () {
     questionCounter = 0; //always start at 0
     score = 0;
     availableQuestions = [...questions]; //copy all questions from the question array, spreadout by new arrays
-    console.log(availableQuestions); //TODO:: REMOVE AT THE END OF THIS
     homeContainer.style.display = "none";
     questionContainer.style.display = "block ";
     timer();
@@ -100,7 +98,7 @@ function timer() {
     }
   };
 function getQuestions() {
-    //TODO: take to end page once questions or timerEl is 0
+
     if(availableQuestions.length === 0 || timeLeft < 1 ) {
         timer.endTimer();
         endQuiz();
@@ -135,8 +133,6 @@ function checkResults () {
             acceptingAnswer = false;
             const selectedChoice = event.target; //prints as string
             const selectedAnswer = selectedChoice.dataset["number"]; //prints as number
-
-            console.log(selectedAnswer, currentQuestion.answer); //print elected answer and the correct answer    
             
             //updates the color of the choice depending on the outcome
             var optionResult = "incorrect";
@@ -144,7 +140,6 @@ function checkResults () {
             if (selectedAnswer == currentQuestion.answer) {
                     optionResult = "correct";
                 }
-                console.log(optionResult);
 
                 selectedChoice.classList.add(optionResult);
                 setTimeout(() => {
@@ -166,11 +161,16 @@ function endQuiz () {
 function saveScore() {
     finalScore.innerText = "Your score is " + timeLeft + " seconds";
 }
+//make submit button valid once details added to username
+username.addEventListener('keyup', () => {
+    submitButton.disabled = !username.value;
+});
+
 submitButton.addEventListener("click", function(event) {
      event.preventDefault();
      var score = {
-        // score: timeLeft,
-        score: Math.floor(Math.random() * 100), //TODO: FOR TESTING, REMOVE
+        score: timeLeft,
+        // score: Math.floor(Math.random() * 100), //FOR TESTING SORT, REMOVE ONCE COMPLETE
         name: username.value,
     };
 
@@ -187,7 +187,6 @@ function viewScoreboard() {
     homeContainer.style.display = "none";
     resultsContainer.style.display = "none ";
     highscoreContainer.style.display = "flex";
-
 
     for (let i = 0; i < highScores.length; i++) {
         var resultsDetails = `${highScores[i].name}` + " - " + `${highScores[i].score}` + " points";
