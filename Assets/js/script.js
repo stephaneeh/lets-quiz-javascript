@@ -1,5 +1,5 @@
 //------timer variables
-let timeLeft = 80; //TODO: Update total time
+let timeLeft = 75; //TODO: Update total time
 var timerInterval = "";
 //------element variables
 var timerEl = document.querySelector("#timer");
@@ -22,7 +22,8 @@ var randomQuestion = Math.floor(Math.random() * availableQuestions.length);
 var username = document.getElementById("username");
 var submitButton = document.querySelector("#submit-button");
 var finalScore = document.querySelector("#final-score");
-
+var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+var scoreboardCount = 5;
 
 //------question list TODO: update questions
 var questions = [
@@ -74,8 +75,6 @@ function startQuiz () {
     console.log(availableQuestions); //TODO:: REMOVE AT THE END OF THIS
     homeContainer.style.display = "none";
     questionContainer.style.display = "block ";
-    resultsContainer.style.display = "none";
-    highscoreContainer.style.display = "none";
     timer();
     getQuestions();
 }
@@ -84,8 +83,8 @@ function startQuiz () {
 function timer() {
     var timeInterval = setInterval(function() {
         if (timeLeft > 1) {
-                timerEl.textContent = timeLeft + " seconds remaining";
-                timeLeft--;
+            timerEl.textContent = timeLeft + " seconds remaining";
+            timeLeft--;
         } else {
             timerEl.textContent = "Time is up!";
             clearInterval(timeInterval);
@@ -99,14 +98,15 @@ function timer() {
   };
 function getQuestions() {
     //TODO: take to end page once questions or timerEl is 0
-    if(availableQuestions.length === 0) {
+    if(availableQuestions.length === 0 || timeLeft < 1 ) {
         timer.endTimer();
         endQuiz();
     } else {
         questionCounter++;
-        //get random question from available questions index
-        currentQuestion = availableQuestions[randomQuestion]; //pulls an available question out of the questions array
-        question.innerText = currentQuestion.question; //prints the selected question in HTML on the page
+        currentQuestion = availableQuestions[randomQuestion]; 
+        //pulls an available question out of the questions array
+        question.innerText = currentQuestion.question; 
+        //prints the selected question in HTML on the page
         getOptions();
     }
 }
@@ -154,56 +154,26 @@ function checkResults () {
 
 //------end the quiz
 function endQuiz () {
-    homeContainer.style.display = "none";
     questionContainer.style.display = "none ";
     resultsContainer.style.display = "flex";
-    highscoreContainer.style.display = "none";
     saveScore();
 }
 
-
-var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
-var scoreboardCount = 5;
-
-//TODO: SUBMIT HIGHSCORE
+//------ save score in localStorage
 function saveScore() {
     finalScore.textContent = "Your score is " + timeLeft + " seconds";
 }
 submitButton.addEventListener("click", function(event) {
      event.preventDefault();
      var score = {
-        // score: timeLeft,
-        score: Math.floor(Math.random() * 100),
+        score: timeLeft,
+        // score: Math.floor(Math.random() * 100), TODO: FOR TESTING, REMOVE
         name: username.value,
     };
     highScores.push(score); //add scores to array
+    username.value = ""; //clears input field
     highScores.sort((a,b) => b.score - a.score); //sort score ascending
     highScores.splice(5); //remove after index 5
-
     localStorage.setItem("highScores", JSON.stringify(highScores));
-    viewScoreboard();
+    // viewScoreboard();
  });
-
-function viewScoreboard () {
-    homeContainer.style.display = "none";
-    questionContainer.style.display = "none ";
-    resultsContainer.style.display = "none";
-    highscoreContainer.style.display = "flex";
-}
-
-
-
-
-
-
-
-// //TODO: VIEW HIGHSCORE
-
-// function highScores () {
-//     //Will display the top 10 highscores
-//     //Will display byttongs to try again, clear highscores or go home
-//     //Try again goes to start game function
-//     //go home goes to endQuiz function? maybe
-// }
-
-

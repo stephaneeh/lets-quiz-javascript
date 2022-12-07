@@ -25,25 +25,43 @@ h2{
   text-align: center;
 }
 
-  nav {
-    display: flex;
-    justify-content: space-between;
-  }
+nav {
+  display: flex;
+  justify-content: space-between;
+}
     
-  p {
-    padding: 5px;
-    background-color: grey;
-    border-radius: 5px;
-    margin: 5px;
-  }
+p {
+  padding: 5px;
+  background-color: grey;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+ol {
+  padding: 5px;
+  background-color: red;
+  border-radius: 5px;
+  margin: 5px;
+}
+
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  margin: 10px;
+}
 
 button {
   background-color: green;
   align-content: center;
+  margin: 10px;
 }
 
 .home-container {
-  display: visible;
+  display: block;
   border: 1px dashed black;
   text-align: center;
   margin: 5px;
@@ -66,16 +84,10 @@ button {
 }
 
 .highscore-container {
-  display: none;
+  display: flex;
   flex-direction: column;
   border: 1px dashed black;
   align-items: center;
-  margin: 5px;
-}
-
-input,
-button {
-  width: 25%;
   margin: 10px;
 }
 
@@ -101,9 +113,3 @@ button {
 
 
 
-form {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
