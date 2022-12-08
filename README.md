@@ -15,7 +15,7 @@ This application has been built using HTML, CSS and JavaScript.
 
 ## Application
 
-Check out Let's Quiz - Javascript here - https://stephaneeh.github.io/lets-quiz-javascript
+Check out Let's Quiz - Javascript here - https://stephaneeh.github.io/lets-quiz-javascript/
 
 ## Screenshots of application
 
