@@ -173,9 +173,7 @@ var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
         highScores.splice(5); //remove after index 5
         localStorage.setItem("highScores", JSON.stringify(highScores));    
         
-        window.location.href = "/highscore.html";
+        window.location.href = "../pages/highscore.html";
      });
     
-
-
     startQuiz();
