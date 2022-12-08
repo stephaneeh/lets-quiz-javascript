@@ -9,7 +9,7 @@ This application has been built using HTML, CSS and JavaScript.
 ## Structure
 
 - `index.html` Entry point for the application, configures the landing page and welcome content
-- `assets/pages/' Contains the game.html and highscore.html pages which are used throughout the application
+- `assets/pages/` Contains the game.html and highscore.html pages which are used throughout the application
 - `assets/css` Holds the stylesheets for this application
 - `assets/js` Contains the game.js and highscore.js files that are used to update and store various functions within this application.
 
