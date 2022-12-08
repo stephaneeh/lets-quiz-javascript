@@ -28,36 +28,44 @@ var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
     //------question list TODO: update questions
     var questions = [
         {
-            question: "What is your favourite colour?",
-            option1: "yellow",
-            option2: "green",
-            option3: "blue",
-            option4: "red",
+            question: "Which of the below is not a JavaScript Data Type?",
+            option1: "Number",
+            option2: "String",
+            option3: "Unspecified",
+            option4: "Object",
             answer: 3 //index of options that is the answer
         },
         {
-            question: "What is your favourite animal?",
-            option1: "monkey",
-            option2: "lion",
-            option3: "giraffe",
-            option4: "elephant",
+            question: "What would you use to add a comment to your Javascript?",
+            option1: "//",
+            option2: "/* */",
+            option3: "<-- -->",
+            option4: "///",
             answer: 1 //index of options that is the answer
         },
         {
-            question: "Who is your favourite finding nemo character?",
-            option1: "dory",
-            option2: "nemo",
-            option3: "marlin",
-            option4: "bruce",
+            question: "Which is the correct operator to use when comparing 2 operands for equality in value only?",
+            option1: "===",
+            option2: "!=",
+            option3: "=",
+            option4: "==",
             answer: 4 //index of options that is the answer
         },
         {
-            question: "What is your favourite number?",
-            option1: "This is option 1",
-            option2: "This is option 2",
-            option3: "This is option 3",
-            option4: "This is option 4",
+            question: "Select the option below which is not a valid JavaScript loop structure?",
+            option1: "for/in",
+            option2: "if/then",
+            option3: "while",
+            option4: "if/else",
             answer: 2//index of options that is the answer
+        },
+        {
+            question: "What is the DOM?",
+            option1: "Documentation Of Methods",
+            option2: "Data Of Measurements",
+            option3: "Document Object Model",
+            option4: "Details Only Modals",
+            answer: 3//index of options that is the answer
         },
     ]
     
