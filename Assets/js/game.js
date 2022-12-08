@@ -125,15 +125,15 @@ var highScores = JSON.parse(localStorage.getItem("highScores")) || [];
                 const selectedChoice = event.target; //prints as string
                 const selectedAnswer = selectedChoice.dataset["number"]; //prints as number
                 const correctAnswer = currentQuestion.answer;
-    
+
                 //updates the color of the choice depending on the outcome
                 var optionResult = "incorrect";
                     timeLeft = timeLeft - 10;    
                 if (selectedAnswer == currentQuestion.answer) {
                         optionResult = "correct";
+                        selectedChoice.classList.add(optionResult);
                         timeLeft = timeLeft + 10;    
-                    }
-    
+                    }                
                     selectedChoice.classList.add(optionResult);
                     setTimeout(() => {
                         selectedChoice.classList.remove(optionResult);

@@ -9,18 +9,15 @@
 </head>
 <body>
     <header>
-        <nav>
-            <button><a href="./index.html">Go home</a></button>
-            <button><a href="./highscore.html">View Highscores</a></button>
-        </nav>
-
+            <button id="left-btn"><a href="./index.html">Go home</a></button>
+            <button id="right-btn"><a href="./highscore.html">View Highscores</a></button>
     </header>
     
     <main>
         <section class="container" id="question-container">
+            
             <div class="quiz-header"></div>
                 <h2 id="question"></h2>
-                <h2 id="timer"></h2>
             </div>
             <div id="options-container">
                 <p class="option" data-number="1" data-state="visible"></p>
@@ -28,6 +25,7 @@
                 <p class="option" data-number="3" data-state="visible"></p>
                 <p class="option" data-number="4" data-state="visible"></p>
             </div>
+            <p id="timer"></p>
         </section>
 
         <section class="container" id="results-container">
