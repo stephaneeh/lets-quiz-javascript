@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="./assets/css/style.css" />
+    <title>The JS Fundamentals Quiz</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <button><a href="./index.html">Go home</a></button>
+            <button><a href="./highscore.html">View Highscores</a></button>
+        </nav>
+
+    </header>
+    
+    <main>
+        <section class="container" id="question-container">
+            <div class="quiz-header"></div>
+                <h2 id="question"></h2>
+                <h2 id="timer"></h2>
+            </div>
+            <div id="options-container">
+                <p class="option" data-number="1" data-state="visible"></p>
+                <p class="option" data-number="2" data-state="visible"></p>
+                <p class="option" data-number="3" data-state="visible"></p>
+                <p class="option" data-number="4" data-state="visible"></p>
+            </div>
+        </section>
+
+        <section class="container" id="results-container">
+            <h1>Game over!</h1>
+            <h2 id="final-score"></h2> 
+            <!-- FIXME: possible remove content -->
+            <h3>Did you get the newest highscore? Enter your initials below and hit submit to find out!</h3>
+            <form>
+                <input type="text" id="username" placeholder="Enter your initials here" />
+                <button 
+                    type="submit" 
+                    id="submit-button" 
+                    onclick="saveScore(event)" 
+                    disabled>Submit
+            </button>
+            </form>
+        </section>
+        
+    </main>
+    
+    <script src="./assets/js/game.js"></script>
+</body>
+</html>

@@ -9,53 +9,16 @@
 </head>
 <body>
     <header>
-        <input type="text" value="View Highscores" onclick="viewScoreboard();" />
-        <h3 id="timer">Timer Countdown</h3>
+        <button><a href="./highscore.html">View Highscores</a></button>
     </header>
     
     <main>
-        <section class="home-container">
+        <section class="container" id="home-container">
             <h1>Welcome to the wide wonderful world of Javascript!</h1>
             <p>Put your knowledge to the test and see if you can go toe to toe with the best of the best when it comes to Javascript!</p>
-            <button id="start-button"> Let's do it!</button> 
-        </section>
-
-        <section class="question-container">
-            <h2 id="question">Enter question here</h2>
-            <div class="options-container">
-                <p class="option" data-number="1" data-state="visible"></p>
-                <p class="option" data-number="2" data-state="visible"></p>
-                <p class="option" data-number="3" data-state="visible"></p>
-                <p class="option" data-number="4" data-state="visible"></p>
-            </div>
-        </section>
-
-        <section class="results-container">
-            <h1>Game over!</h1>
-            <h2 id="final-score"></h2> 
-            <!-- FIXME: possible remove content -->
-            <h3>Did you get the newest highscore? Enter your initials below and hit submit to find out!</h3>
-            <form>
-                <input type="text" id="username" placeholder="Enter your initials here">
-                    <button 
-                    type="submit" 
-                    id="submit-button" 
-                    onclick="saveScore(event)" 
-                    disabled>Submit
-                </button>
-                </a>
-            </form>
-        </section>
-
-        <section class="highscore-container">
-            <h2>Checkout the scoreboard!</h2>
-            <ol class="scoreboard"></ol>
-            <button id="try-again">Return Home</button>
-            <button id="clear-scores">Clear highscores</button>
+            <button id="start-button"><a href="./game.html">Let's go!</a></button>
         </section>
         
     </main>
-    
-    <script src="./assets/js/script.js"></script>
 </body>
 </html>
